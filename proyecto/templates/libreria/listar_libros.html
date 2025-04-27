@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lista de Libros</title>
+</head>
+<body>
+    <h1>Lista de Libros</h1>
+    <ul>
+        {% for libro in libros %}
+            <li>
+                <strong>{{ libro.titulo }}</strong> - {{ libro.autor }} - ${{ libro.precio }}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'agregar_libro' %}">Agregar un nuevo libro</a>
+</body>
+</html>
