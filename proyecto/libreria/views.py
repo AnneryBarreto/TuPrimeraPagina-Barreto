@@ -2,20 +2,20 @@ from django.views.generic import ListView, DetailView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
-from .models import Libro
-from .forms import LibroForm
+from proyecto.libreria.models import Libro
+from proyecto.libreria.forms import LibroForm
 from django.shortcuts import render, redirect
-from proyecto.mixins import RequiereLoginMixin
+from proyecto.proyecto.mixins import RequiereLoginMixin
 
 def base(request):
-    return render(request, 'libreria/base.html')
+    return render(request, 'base.html')
 
 def acerca(request):
     return render(request, 'acerca.html')
 
 def listar_libros(request):
     libros = Libro.objects.all() 
-    return render(request, 'libreria/listar_libros.html', {'libros': libros})
+    return render(request, 'libreria/templates/libreria/listar_libros.html', {'libros': libros})
 
 @login_required
 def agregar_libro(request):
