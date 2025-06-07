@@ -9,6 +9,7 @@
         {% for libro in libros %}
             <li>
                 <strong>{{ libro.titulo }}</strong> - {{ libro.autor }} - ${{ libro.precio }}
+                <p><a href="{% url 'detalle_libro' libro.pk %}">Ver detalles</a></p>
             </li>
         {% endfor %}
     </ul>
