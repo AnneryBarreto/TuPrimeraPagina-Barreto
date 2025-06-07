@@ -20,7 +20,7 @@ def acerca(request):
 @login_required
 def listar_libros(request):
     libros = Libro.objects.all() 
-    return render(request, 'listar_libros.html', {'libros': libros})
+    return render(request, 'libreria/listar_libros.html', {'libros': libros})
 
 def agregar_libro(request):
     if request.method == 'POST':
@@ -30,11 +30,11 @@ def agregar_libro(request):
             return redirect('listar_libros')
     else:
         form = LibroForm()
-    return render(request, 'agregar_libro.html', {'form': form})
+    return render(request, 'libreria/agregar_libro.html', {'form': form})
 
 def detalle_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)
-    return render(request, 'detalle_libro.html', {'libro': libro})
+    return render(request, 'libreria/detalle_libro.html', {'libro': libro})
 
 def editar_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)
@@ -42,14 +42,14 @@ def editar_libro(request, pk):
     if form.is_valid():
         form.save()
         return redirect('detalle_libro', pk=libro.pk)
-    return render(request, 'editar_libro.html', {'form': form})
+    return render(request, 'libreria/editar_libro.html', {'form': form})
 
 def borrar_libro(request, pk):
     libro = get_object_or_404(Libro, pk=pk)
     if request.method == 'POST':
         libro.delete()
         return redirect('listar_libros')
-    return render(request, 'borrar_libro.html', {'libro': libro})
+    return render(request, 'libreria/borrar_libro.html', {'libro': libro})
 
 @login_required
 def agregar_libro(request):
@@ -70,11 +70,11 @@ def registro_usuario(request):
             return redirect('login')
     else:
         form = RegistroUsuarioForm()
-    return render(request, 'registro.html', {'form': form})
+    return render(request, 'usuarios/registro.html', {'form': form})
 
 @login_required
 def perfil_usuario(request):
-    return render(request, 'perfil.html', {'user': request.user})
+    return render(request, 'usuarios/perfil.html', {'user': request.user})
 
 @login_required
 def editar_perfil(request):
@@ -85,7 +85,7 @@ def editar_perfil(request):
             return redirect('perfil')
     else:
         form = UserChangeForm(instance=request.user)
-    return render(request, 'editar_perfil.html', {'form': form})
+    return render(request, 'usuarios/editar_perfil.html', {'form': form})
 
 class LibroListView(ListView):
     model = Libro
