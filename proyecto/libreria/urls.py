@@ -11,8 +11,8 @@ urlpatterns = [
     path('libro/<int:pk>/borrar/', views.borrar_libro, name='borrar_libro'),
     path('acerca/', views.acerca, name='acerca'),
     path('registro/', views.registro_usuario, name='registro'),
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
+    path('login/', auth_views.LoginView.as_view(template_name='usuarios/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(template_name='usuarios/logout.html'), name='logout'),
     path('perfil/', views.perfil_usuario, name='perfil'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
 ]
