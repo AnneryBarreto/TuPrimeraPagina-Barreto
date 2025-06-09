@@ -96,8 +96,8 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media"
 
 LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/base/'
-LOGOUT_REDIRECT_URL = '/base/'
+LOGIN_REDIRECT_URL = '/listar_libros/'
+LOGOUT_REDIRECT_URL = '/'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

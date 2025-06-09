@@ -3,6 +3,8 @@ from django.utils.translation import gettext_lazy as _
 from proyecto.libreria.models import Libro
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from django import forms
+from .models import Usuario
 
 class LibroForm(forms.ModelForm):
     class Meta:
@@ -13,3 +15,8 @@ class RegistroUsuarioForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username', 'email', 'password']
+
+class ImagenPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['avatars']

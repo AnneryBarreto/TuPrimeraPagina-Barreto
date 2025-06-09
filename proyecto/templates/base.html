@@ -14,5 +14,19 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }} | 
+        <a href="{% url 'perfil' %}">Ver perfil</a> | 
+        {% if user.imagen %}
+        <img src="{{ user.imagen.url }}" alt="Imagen de perfil">
+        {% endif %}
+        <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+        </form>
+    {% else %}
+        <p><a href="{% url 'login' %}">Iniciar sesión</a> | 
+        <a href="{% url 'registro' %}">Registrarse</a></p>
+    {% endif %}
 </body>
 </html>

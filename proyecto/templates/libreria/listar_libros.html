@@ -4,6 +4,19 @@
     <title>Lista de Libros</title>
 </head>
 <body>
+    <nav>
+        <a href="{% url 'inicio' %}">Inicio</a>
+        <a href="{% url 'listar_libros' %}">Libros</a>
+        <a href="{% url 'acerca' %}">Acerca de</a>
+    </nav>
+    {% if user.is_authenticated %}
+        <p>Bienvenido, {{ user.username }} | 
+        <a href="{% url 'perfil' %}">Ver perfil</a> | 
+        <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Cerrar sesión</button>
+        </form>
+        {% endif %}
     <h1>Lista de Libros</h1>
     <ul>
         {% for libro in libros %}

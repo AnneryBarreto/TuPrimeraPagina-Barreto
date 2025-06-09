@@ -2,5 +2,10 @@
 {% block content %}
 <h2>Perfil de {{ user.username }}</h2>
 <p>Email: {{ user.email }}</p>
+{% if user.imagen %}
+    <img src="{{ user.imagen.url }}" alt="Imagen de perfil">
+{% else %}
+    <p>No has subido una imagen aún.</p>
+{% endif %}
 <a href="{% url 'editar_perfil' %}">Editar perfil</a>
 {% endblock %}

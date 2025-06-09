@@ -10,6 +10,8 @@ from proyecto.proyecto.mixins import RequiereLoginMixin
 from .forms import RegistroUsuarioForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
+from .forms import ImagenPerfilForm
+from .models import Usuario
 
 def base(request):
     return render(request, 'base.html')
@@ -85,6 +87,16 @@ def editar_perfil(request):
             return redirect('perfil')
     else:
         form = UserChangeForm(instance=request.user)
+    return render(request, 'usuarios/editar_perfil.html', {'form': form})
+
+def actualizar_imagen(request):
+    if request.method == 'POST':
+        form = ImagenPerfilForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('perfil')
+    else:
+        form = ImagenPerfilForm(instance=request.user)
     return render(request, 'usuarios/editar_perfil.html', {'form': form})
 
 class LibroListView(ListView):

@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.base, name='inicio'), 
@@ -12,7 +14,7 @@ urlpatterns = [
     path('acerca/', views.acerca, name='acerca'),
     path('registro/', views.registro_usuario, name='registro'),
     path('login/', auth_views.LoginView.as_view(template_name='usuarios/login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(template_name='usuarios/logout.html'), name='logout'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('perfil/', views.perfil_usuario, name='perfil'),
     path('perfil/editar/', views.editar_perfil, name='editar_perfil'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

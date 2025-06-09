@@ -4,6 +4,11 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
+    {% if user.imagen %}
+    <img src="{{ user.imagen.url }}" alt="Imagen de perfil">
+    {% else %}
+    <p>No has subido una imagen aún.</p>
+    {% endif %}
     <button type="submit">Guardar cambios</button>
 </form>
 {% endblock %}
