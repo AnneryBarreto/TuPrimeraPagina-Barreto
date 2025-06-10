@@ -4,4 +4,4 @@ Actualización: Modifique unas cosas en el codigo y me dio algunos problemas. Es
 Actualización: corregi algunas rutas mal hechas, pero sigo solucionando otros errores.
 Actualización: estoy terminando las correciones que me hicieron, pero aún no estan listas.
 Actualización: Hice varias correcciones que arreglaron unas rutas que hice mal. Faltan algunas correciones.
-ACTUALIZACIÓN: Realizadas las correciones.
+ACTUALIZACIÓN: Realizadas las correciones. Tengo problemas con la ruta para subir imagen de portada y avatars, son lo unico que me falta por solucionar.

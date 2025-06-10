@@ -10,7 +10,8 @@ from proyecto.proyecto.mixins import RequiereLoginMixin
 from .forms import RegistroUsuarioForm
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm
-from .forms import ImagenPerfilForm
+from django.contrib.auth import update_session_auth_hash
+from .forms import UsuarioForm, CambiarPasswordForm
 from .models import Usuario
 
 def base(request):
@@ -26,6 +27,7 @@ def listar_libros(request):
 
 def agregar_libro(request):
     if request.method == 'POST':
+        print(request.FILES)
         form = LibroForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
@@ -62,7 +64,7 @@ def agregar_libro(request):
             return redirect('listar_libros')
     else:
         form = LibroForm()
-    return render(request, 'libreria/agregar_libro.html', {'form': form})
+    return render(request, 'agregar_libro.html', {'form': form})
 
 def registro_usuario(request):
     if request.method == 'POST':
@@ -80,24 +82,29 @@ def perfil_usuario(request):
 
 @login_required
 def editar_perfil(request):
+    usuario = request.user
+    
     if request.method == 'POST':
-        form = UserChangeForm(request.POST, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('perfil')
-    else:
-        form = UserChangeForm(instance=request.user)
-    return render(request, 'usuarios/editar_perfil.html', {'form': form})
+        usuario_form = UsuarioForm(request.POST, request.FILES, instance=usuario)
+        password_form = CambiarPasswordForm(user=usuario, data=request.POST)
 
-def actualizar_imagen(request):
-    if request.method == 'POST':
-        form = ImagenPerfilForm(request.POST, request.FILES, instance=request.user)
-        if form.is_valid():
-            form.save()
-            return redirect('perfil')
+        if usuario_form.is_valid():
+            usuario_form.save()
+
+        if password_form.is_valid():
+            password_form.save()
+            update_session_auth_hash(request, usuario)
+        
+        return redirect('perfil')
+    
     else:
-        form = ImagenPerfilForm(instance=request.user)
-    return render(request, 'usuarios/editar_perfil.html', {'form': form})
+        usuario_form = UsuarioForm(instance=usuario)
+        password_form = CambiarPasswordForm(user=usuario)
+
+    return render(request, 'usuarios/editar_perfil.html', {
+        'usuario_form': usuario_form,
+        'password_form': password_form
+    })
 
 class LibroListView(ListView):
     model = Libro

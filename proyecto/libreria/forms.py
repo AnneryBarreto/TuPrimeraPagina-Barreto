@@ -3,8 +3,9 @@ from django.utils.translation import gettext_lazy as _
 from proyecto.libreria.models import Libro
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-from django import forms
-from .models import Usuario
+from proyecto.libreria.models import Libro
+from proyecto.libreria.models import Usuario
+from django.contrib.auth.forms import PasswordChangeForm
 
 class LibroForm(forms.ModelForm):
     class Meta:
@@ -16,7 +17,10 @@ class RegistroUsuarioForm(UserCreationForm):
         model = User
         fields = ['username', 'email', 'password']
 
-class ImagenPerfilForm(forms.ModelForm):
+class UsuarioForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ['avatars']
+        fields = ['imagen', 'email', 'first_name', 'last_name']
+
+class CambiarPasswordForm(PasswordChangeForm):
+    pass

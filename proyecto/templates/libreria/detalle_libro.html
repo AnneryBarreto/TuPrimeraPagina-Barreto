@@ -9,7 +9,9 @@
 <p>Precio: ${{ libro.precio }}</p>
 
 {% if libro.portada %}
-<img src="{{ libro.portada.url }}" alt="{{ libro.titulo }}" width="200">
+    <img src="{{ libro.portada.url }}" alt="Portada de {{ libro.titulo }}" width="150">
+{% else %}
+    <p>No hay portada disponible.</p>
 {% endif %}
 
 <a href="{% url 'editar_libro' libro.pk %}">Editar</a> |

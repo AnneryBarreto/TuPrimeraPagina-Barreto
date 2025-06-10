@@ -18,14 +18,19 @@
         </form>
         {% endif %}
     <h1>Lista de Libros</h1>
-    <ul>
-        {% for libro in libros %}
-            <li>
-                <strong>{{ libro.titulo }}</strong> - {{ libro.autor }} - ${{ libro.precio }}
-                <p><a href="{% url 'detalle_libro' libro.pk %}">Ver detalles</a></p>
-            </li>
-        {% endfor %}
-    </ul>
-    <a href="{% url 'agregar_libro' %}">Agregar un nuevo libro</a>
+<ul>
+    {% for libro in libros %}
+    <li>
+        {% if libro.portada %}
+            <img src="{{ libro.portada.url }}" alt="Portada de {{ libro.titulo }}" width="150">
+        {% else %}
+            <p>No hay portada disponible.</p>
+        {% endif %}
+        <strong>{{ libro.titulo }}</strong> - {{ libro.autor }} - ${{ libro.precio }}
+        <p><a href="{% url 'detalle_libro' libro.pk %}">Ver detalles</a></p>
+    </li>
+    {% endfor %}
+</ul>
+<a href="{% url 'agregar_libro' %}">Agregar un nuevo libro</a>
 </body>
 </html>
